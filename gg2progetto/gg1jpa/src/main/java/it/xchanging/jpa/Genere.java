@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Genere {
-	
+	// questo è l'id
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;	
