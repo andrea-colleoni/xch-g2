@@ -23,6 +23,7 @@ public class Libri {
 	
 	@Autowired
 	private EntityManager em;
+	//....
 	
 	@RequestMapping(value="/DatiElencoLibri", method = RequestMethod.GET)
 	public @ResponseBody List<Libro> elencoLibri(){
