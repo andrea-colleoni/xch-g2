@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence 
+  					  http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+  version="2.1">
+ 	<persistence-unit name="andrea" transaction-type="RESOURCE_LOCAL">
+ 		<class>it.xchanging.jpa.Libro</class>
+ 		<class>it.xchanging.jpa.Genere</class>
+ 		<class>it.xchanging.jpa.CasaEditrice</class>
+ 		
+ 		<properties>
+ 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/andrea"/>
+ 			<property name="javax.persistence.jdbc.user" value="root"/>
+ 			<property name="javax.persistence.jdbc.password" value="password"/>
+ 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+ 			<property name="eclipselink.logging.level.sql" value="INFO"/>
+ 		</properties>
+ 	</persistence-unit>
+ 	<persistence-unit name="sakila">
+ 	<class>it.xchanging.jpa.sakila.Actor</class>
+ 		<class>it.xchanging.jpa.sakila.ActorInfo</class>
+ 		<class>it.xchanging.jpa.sakila.Address</class>
+ 		<class>it.xchanging.jpa.sakila.Category</class>
+ 		<class>it.xchanging.jpa.sakila.City</class>
+ 		<class>it.xchanging.jpa.sakila.Country</class>
+ 		<class>it.xchanging.jpa.sakila.Customer</class>
+ 		<class>it.xchanging.jpa.sakila.CustomerList</class>
+ 		<class>it.xchanging.jpa.sakila.Film</class>
+ 		<class>it.xchanging.jpa.sakila.FilmActor</class>
+ 		<class>it.xchanging.jpa.sakila.FilmActorPK</class>
+ 		<class>it.xchanging.jpa.sakila.FilmCategory</class>
+ 		<class>it.xchanging.jpa.sakila.FilmCategoryPK</class>
+ 		<class>it.xchanging.jpa.sakila.FilmList</class>
+ 		<class>it.xchanging.jpa.sakila.FilmText</class>
+ 		<class>it.xchanging.jpa.sakila.Inventory</class>
+ 		<class>it.xchanging.jpa.sakila.Language</class>
+ 		<class>it.xchanging.jpa.sakila.NicerButSlowerFilmList</class>
+ 		<class>it.xchanging.jpa.sakila.Payment</class>
+ 		<class>it.xchanging.jpa.sakila.Rental</class>
+ 		<class>it.xchanging.jpa.sakila.SalesByFilmCategory</class>
+ 		<class>it.xchanging.jpa.sakila.SalesByStore</class>
+ 		<class>it.xchanging.jpa.sakila.Staff</class>
+ 		<class>it.xchanging.jpa.sakila.StaffList</class>
+ 		<class>it.xchanging.jpa.sakila.Store</class>
+ 		 		<properties>
+ 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sakila"/>
+ 			<property name="javax.persistence.jdbc.user" value="root"/>
+ 			<property name="javax.persistence.jdbc.password" value="password"/>
+ 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+ 			<property name="javax.persistence.schema-generation.database.action" value="create"/>
+ 			<property name="eclipselink.logging.level.sql" value="FINER"/>
+ 		</properties>
+ 	</persistence-unit>
+ </persistence>

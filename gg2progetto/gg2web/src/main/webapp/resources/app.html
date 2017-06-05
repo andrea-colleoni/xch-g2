@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"> 
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body>
+<div id="nuovoLibro">
+	Titolo: <input type="text" id="txtTitolo"><br>
+	Autore: <input type="text" id="txtAutore"><br>
+	Data pubblicazione: <input type="text" id="txtData" ><br>
+	<button id="btnSalva">salva il libro</button>
+</div>
+<table id="elencoLibri"></table>
+
+
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script> 
+<script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script>
+	$(document).ready(function(){
+		reloadDati();
+		$('#txtData').datepicker({
+			dateFormat: 'yy-mm-dd',
+			maxDate: new Date()
+		});
+		$('#btnSalva').click(function() {
+			var l = {};
+			l.titolo = $('#txtTitolo').val();
+			l.autore = $('#txtAutore').val();
+			$.ajax({
+				url: '/kso/nuovoLibro',
+				type: 'put',
+				data: JSON.stringify(l),
+				dataType: 'json',
+				contentType: 'application/json'
+			})
+			.done(function() {
+				reloadDati();
+			})
+		});
+	});
+	
+	function reloadDati() {
+		$.ajax({
+			url: '/kso/DatiElencoLibri', // '/resources/libriMock.json'
+			type: 'get'
+		})
+		.done(function(dati) {
+
+			console.log(dati);
+			$('#elencoLibri').DataTable({
+		    	data: dati,
+		    	destroy: true,
+		    	columns: [
+		    		{
+		    			'title': 'Titolo',
+		    			'data': 'titolo'
+		    		},{
+		    			'title': 'Autore',
+		    			'data': 'autore'
+		    		},{
+		    			'title': 'Casa editrice',
+		    			'data': 'casaEditrice.nome'
+		    		}
+		    	]
+		    });			
+		}); 	
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+[
+  {
+    "titolo": "La Divina Commedia",
+    "genere": {
+      "nome": "Narrativa",
+      "descrizione": "Libri di narrativa"
+    },
+    "autore": "Dante Alighieri",
+    "dataPubblicazione": 1495465591000,
+    "casaEditrice": {
+      "id": 1,
+      "nome": "Hoepli",
+      "citta": "Milano"
+    }
+  },
+  {
+    "titolo": "La ........",
+    "genere": {
+      "nome": "Drammatico",
+      "descrizione": "Libri drammatico"
+    },
+    "autore": "Dante Alighieri",
+    "dataPubblicazione": 1495465698000,
+    "casaEditrice": {
+      "id": 1,
+      "nome": "Hoepli",
+      "citta": "Milano"
+    }
+  },
+  {
+    "titolo": "Harry Potter....",
+    "genere": {
+      "nome": "Narrativa",
+      "descrizione": "Libri di narrativa"
+    },
+    "autore": "J.K. Rowling",
+    "dataPubblicazione": 1495466175000,
+    "casaEditrice": {
+      "id": 2,
+      "nome": "Apogeo",
+      "citta": "Bologna"
+    }
+  }
+]
