@@ -33,6 +33,7 @@ public class Libri {
 				.getResultList();
 	}
 	
+	// ggg
 	@RequestMapping(value="/nuovoLibro", method = RequestMethod.PUT)
 	public @ResponseBody boolean inserisciLibro(@RequestBody Libro l) {
 		try {
