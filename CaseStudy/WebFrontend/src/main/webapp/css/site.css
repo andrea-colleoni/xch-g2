@@ -1,0 +1,6 @@
+ul li {
+	display: inline-block;
+	cursor: pointer;
+	margin: 3px;
+	border: 1px dotted #333;
+}

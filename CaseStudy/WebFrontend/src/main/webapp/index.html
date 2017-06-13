@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Case Study</title>
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/datatables.min.css">
+</head>
+<body>
+<h1>Front End Case Study</h1>
+<ul>
+	<li id="mnuNuovoStudente">Nuovo studente</li>
+	<li id="mnuNuovoCorso">Nuovo corso</li>
+	<li id="mnuElencoStudente">Elenco studenti</li>
+	<li id="mnuElencoCorso">Elenco corsi</li>
+</ul>
+<div id="frmStudente" style="display:none">
+	<div>
+		<label for="txtCodiceFiscale">Codice fiscale</label>
+		<input name="codiceFiscale" id="txtCodiceFiscale">
+	</div>
+	<div>
+		<label for="txtMatricola">Matricola</label>
+		<input name="matricola" id="txtMatricola">
+	</div>
+	<div>
+		<label for="txtNome">Nome</label>
+		<input name="nome" id="txtNome">
+	</div>
+	<div>
+		<label for="txtCognome">Cognome</label>
+		<input name="cognome" id="txtCognome">
+	</div>
+	<div>
+		<label for="txtDataNascita">Data di nascita</label>
+		<input name="dataNascita" id="txtDataNascita">
+	</div>		
+	<div>
+		<button id="btnSalvaStudente">Salva lo studente</button>
+	</div>				
+</div>
+<div id="frmCorso" style="display:none">
+	<div>
+		<label for="txtTitolo">Titolo</label>
+		<input name="titolo" id="txtTitolo">
+	</div>
+	<div>
+		<label for="txtDurataInOre">Durata in ore</label>
+		<input name="durataInOre" id="txtDurataInOre">
+	</div>
+	<div>
+		<label for="txtDataInizio">Data d'inizio</label>
+		<input name="dataInizio" id="txtDataInizio">
+	</div>
+	<div>
+		<label for="txtDataFine">Data di fine</label>
+		<input name="dataFine" id="txtDataFine">
+	</div>
+	<div>
+		<button id="btnSalvaCorso">Salva il corso</button>
+	</div>				
+</div>
+<div id="elencoStudenti"style="display:none">
+	<table id="tblStudenti"></table>
+</div>
+<div id="elencoCorsi" style="display:none">
+	<table id="tblCorsi"></table>
+</div>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/datatables.min.js"></script>
+<script>
+	$(function() {
+		$('ul li').click(function() {
+			switch ($(this).attr('id')) {
+				case 'mnuNuovoStudente':
+					nuovoStudente();
+					break;
+				case 'mnuNuovoCorso':
+					$('#elencoStudenti').hide();
+					$('#elencoCorsi').hide();
+					$('#frmStudente').hide();
+					$('#frmCorso').show();
+					break;
+				case 'mnuElencoStudente':
+					elencoStudente();
+					break;
+				case 'mnuElencoCorso':
+					$('#elencoStudenti').hide();
+					$('#frmStudente').hide();
+					$('#frmCorso').hide();
+					$('#elencoCorsi').hide();
+					break;					
+			}
+		});
+	});
+	
+	
+	function nuovoStudente() {
+		$('#elencoStudenti').hide(600);
+		$('#elencoCorsi').hide(600);
+		$('#frmCorso').hide(600);
+		$('#frmStudente').show(600);
+		$('#btnSalvaStudente').click(function() {
+			// salvo lo studente
+			var s = {};
+			s.nome = $('#txtNome').val();
+			s.cognome = $('#txtCognome').val();
+			s.matricola = $('#txtMatricola').val();
+			s.codiceFiscale = $('#txtCodiceFiscale').val();
+			s.dataNascita = $('#txtDataNascita').val();
+			$.ajax({
+				url: 'http://localhost:8080/salvaStudente',
+				type: 'post',
+				data: JSON.stringify(s),
+				contentType: 'application/json'
+			})
+			.done(function(){
+				elencoStudente();
+				$('#frmStudente').hide(600);
+			})
+			.fail(function() {
+				alert('qualcosa non va');
+			});
+		});
+	}
+	
+	function elencoStudente() {
+		$('#elencoCorsi').hide(600);
+		$('#frmStudente').hide(600);
+		$('#frmCorso').hide(600);
+		$('#elencoStudenti').show(600);
+		// caricare gli studenti da WS
+		$.ajax({
+			url: 'http://localhost:8080/elencoStudenti',
+			type: 'get'
+		})
+		.done(function(dati){
+			$('#tblStudenti').DataTable({
+				data: dati,
+				destroy: true,
+				columns: [
+					{
+						title: 'Nome',
+						data: 'nome'
+					},{
+						title: 'Cognome',
+						data: 'cognome'
+					}
+				]
+			});
+		})
+	}
+</script>
+</body>
+</html>
